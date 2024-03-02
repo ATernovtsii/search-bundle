@@ -2,10 +2,11 @@
 
 namespace ATSearchBundle\Search\Converter\SortQuery;
 
-use ATSearchBundle\Search\Converter\{InputQueryToSearchSort, SortInputQueryToSearchQueryConverterInterface};
-use ATSearchBundle\Search\Resolver\FieldNameResolver;
+use ATSearchBundle\Exception\CriterionFieldNotIndexedException;
 use ATSearchBundle\Query\SortClause\SortByField;
 use ATSearchBundle\Query\SortQueryCriterion;
+use ATSearchBundle\Search\Converter\{InputQueryToSearchSort, SortInputQueryToSearchQueryConverterInterface};
+use ATSearchBundle\Search\Resolver\FieldNameResolver;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -18,11 +19,16 @@ readonly class FieldConverterFilter implements SortInputQueryToSearchQueryConver
     public function convert(SortQueryCriterion $sortClause, InputQueryToSearchSort $converter): array
     {
         if (!$sortClause instanceof SortByField) {
-            throw new InvalidArgumentException('Unsupported criteria');
+            throw new InvalidArgumentException('Unsupported sort criteria');
+        }
+
+        $field = $this->fieldNameResolver->resolve($sortClause->field);
+        if (!$field) {
+            throw new CriterionFieldNotIndexedException($sortClause);
         }
 
         return [
-            $this->fieldNameResolver->resolve($sortClause->field) => ['order' => $this->getDirection($sortClause)],
+            $field => ['order' => $this->getDirection($sortClause)],
         ];
     }
 
@@ -36,7 +42,9 @@ readonly class FieldConverterFilter implements SortInputQueryToSearchQueryConver
         return match ($sortClause->direction) {
             'ASC' => 'asc',
             'DESC' => 'desc',
-            default => throw new RuntimeException('Invalid sort direction: ' . $sortClause->direction),
+            default => throw new RuntimeException(
+                'Invalid sort direction: ' . $sortClause->field . ' ' . $sortClause->direction
+            ),
         };
     }
 }
