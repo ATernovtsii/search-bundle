@@ -3,12 +3,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    ATSearchBundle\CacheWarmer\:
-        resource: '../../CacheWarmer/'
-
-    ATSearchBundle\Command\:
-        resource: '../../Command/'
-
     ATSearchBundle\Doctrine\Converter\:
         bind:
             $defaultLocale: '%kernel.default_locale%'
