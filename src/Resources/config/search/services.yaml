@@ -28,7 +28,7 @@ services:
         resource: '../../../Search/Provider/'
 
     ATSearchBundle\CacheWarmer\:
-        resource: '../../CacheWarmer/'
+        resource: '../../../CacheWarmer/'
 
     ATSearchBundle\Command\:
-        resource: '../../Command/'
+        resource: '../../../Command/'
