@@ -8,13 +8,16 @@ readonly class Result
     public mixed $totalCount;
     /** @var callable|array */
     public mixed $data;
+    public array $aggregations;
 
     public function __construct(
         callable|int|null $totalCount,
         callable|array $data,
+        array $aggregations = []
     ) {
         $this->totalCount = $totalCount;
         $this->data = $data;
+        $this->aggregations = $aggregations;
     }
 
     public function getTotalCount(): ?int

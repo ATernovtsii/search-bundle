@@ -3,15 +3,15 @@
 namespace ATSearchBundle\Search\Converter\FilterQuery;
 
 use ATSearchBundle\Exception\CriterionFieldNotIndexedException;
+use ATSearchBundle\Query\Filter\CustomFieldFilter;
+use ATSearchBundle\Query\Filter\FieldFilter;
+use ATSearchBundle\Query\FilterQueryCriterion;
+use ATSearchBundle\Query\Operator;
 use ATSearchBundle\Search\Converter\FilterInputQueryToSearchQueryConverterInterface;
 use ATSearchBundle\Search\Converter\InputQueryToSearchFilter;
 use ATSearchBundle\Search\Resolver\FieldNameResolver;
 use ATSearchBundle\Search\Resolver\FieldTypeResolver;
 use ATSearchBundle\Search\ValueObject\QueryDSL\RangeQuery;
-use ATSearchBundle\Query\Filter\CustomFieldFilter;
-use ATSearchBundle\Query\Filter\FieldFilter;
-use ATSearchBundle\Query\FilterQueryCriterion;
-use ATSearchBundle\Query\Operator;
 use InvalidArgumentException;
 use function in_array;
 

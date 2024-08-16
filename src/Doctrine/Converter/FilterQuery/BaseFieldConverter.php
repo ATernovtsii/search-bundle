@@ -3,7 +3,9 @@
 namespace ATSearchBundle\Doctrine\Converter\FilterQuery;
 
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Query\Expr\{Comparison, Func, Orx};
+use Doctrine\ORM\Query\Expr\Comparison;
+use Doctrine\ORM\Query\Expr\Func;
+use Doctrine\ORM\Query\Expr\Orx;
 use ATSearchBundle\Doctrine\JoinAwareQueryBuilder;
 use ATSearchBundle\Query\Filter\RelationFieldFilter;
 use ATSearchBundle\Query\Filter\FieldFilter;

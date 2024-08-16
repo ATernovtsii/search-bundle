@@ -4,8 +4,8 @@ namespace ATSearchBundle\Doctrine\Converter\FilterQuery;
 
 use Doctrine\DBAL\Query\Expression\CompositeExpression;
 use InvalidArgumentException;
-use ATSearchBundle\Doctrine\Converter\{InputQueryToDoctrineConverterInterface,
-    InputQueryToDoctrineQueryFilters};
+use ATSearchBundle\Doctrine\Converter\InputQueryToDoctrineConverterInterface;
+use ATSearchBundle\Doctrine\Converter\InputQueryToDoctrineQueryFilters;
 use ATSearchBundle\Doctrine\JoinAwareQueryBuilder;
 use ATSearchBundle\Query\Filter\FieldFilter;
 use ATSearchBundle\Query\FilterQueryCriterion;

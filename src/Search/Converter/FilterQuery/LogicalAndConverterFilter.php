@@ -2,8 +2,10 @@
 
 namespace ATSearchBundle\Search\Converter\FilterQuery;
 
-use ATSearchBundle\Search\Converter\{FilterInputQueryToSearchQueryConverterInterface, InputQueryToSearchFilter};
-use ATSearchBundle\Search\ValueObject\QueryDSL\{BoolQuery, RawQuery};
+use ATSearchBundle\Search\Converter\FilterInputQueryToSearchQueryConverterInterface;
+use ATSearchBundle\Search\Converter\InputQueryToSearchFilter;
+use ATSearchBundle\Search\ValueObject\QueryDSL\BoolQuery;
+use ATSearchBundle\Search\ValueObject\QueryDSL\RawQuery;
 use ATSearchBundle\Query\Filter\LogicalAnd;
 use ATSearchBundle\Query\FilterQueryCriterion;
 

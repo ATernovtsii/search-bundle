@@ -2,6 +2,8 @@
 
 namespace ATSearchBundle\Exception;
 
+use ATSearchBundle\Query\Aggregation\SumAggregation;
+use ATSearchBundle\Query\AggregationQuery;
 use ATSearchBundle\Query\Filter\CustomFieldFilter;
 use ATSearchBundle\Query\Filter\FieldFilter;
 use ATSearchBundle\Query\Filter\RelationFieldFilter;
@@ -12,7 +14,7 @@ use ATSearchBundle\Query\SortQueryCriterion;
 
 class CriterionFieldNotIndexedException extends \InvalidArgumentException
 {
-    public function __construct(FilterQueryCriterion|SortQueryCriterion $criterion)
+    public function __construct(FilterQueryCriterion|SortQueryCriterion|AggregationQuery $criterion)
     {
         $reason = match (true) {
             $criterion instanceof SortByRelationField => $criterion->relationField . '.' . $criterion->field,
@@ -20,6 +22,7 @@ class CriterionFieldNotIndexedException extends \InvalidArgumentException
             $criterion instanceof RelationFieldFilter => implode('.', $criterion->fields),
             $criterion instanceof CustomFieldFilter => $criterion->field,
             $criterion instanceof FieldFilter => $criterion->field,
+            $criterion instanceof SumAggregation => $criterion->field,
             default => get_class($criterion),
         };
         parent::__construct('Unsupported criteria. Field is not indexed: ' . $reason);

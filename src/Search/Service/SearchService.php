@@ -2,13 +2,14 @@
 
 namespace ATSearchBundle\Search\Service;
 
+use ATSearchBundle\Exception\NoConverterException;
+use ATSearchBundle\Query\SearchQuery;
+use ATSearchBundle\Search\Converter\InputQueryToSearchAggregation;
 use ATSearchBundle\Search\Converter\InputQueryToSearchFilter;
 use ATSearchBundle\Search\Converter\InputQueryToSearchSort;
 use ATSearchBundle\Search\Handler\SearchHandler;
 use ATSearchBundle\Search\ValueObject\Query;
-use ATSearchBundle\Exception\NoConverterException;
-use ATSearchBundle\Query\SearchQuery;
-use ATSearchBundle\Service\{SearchServiceInterface};
+use ATSearchBundle\Service\SearchServiceInterface;
 use ATSearchBundle\ValueObject\Result;
 
 readonly class SearchService implements SearchServiceInterface
@@ -17,6 +18,7 @@ readonly class SearchService implements SearchServiceInterface
         private SearchHandler $searchHandler,
         private InputQueryToSearchFilter $queryToSearchFilter,
         private InputQueryToSearchSort $queryToSearchSort,
+        private InputQueryToSearchAggregation $queryToSearchAggregation,
         private DocumentGenerator $documentGenerator
     ) {
     }
@@ -41,6 +43,9 @@ readonly class SearchService implements SearchServiceInterface
 
         if ($searchQuery->subSelects) {
             $query->sourceIncludes = $searchQuery->subSelects;
+        }
+        if ($searchQuery->aggregations) {
+            $query->aggregations = $this->queryToSearchAggregation->convert($searchQuery->aggregations);
         }
 
         return $this->searchHandler->search($query);

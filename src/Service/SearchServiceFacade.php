@@ -13,14 +13,14 @@ use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 readonly class SearchServiceFacade implements SearchServiceInterface
 {
     public function __construct(
-        private ?ElasticOpensearchSearchServiceAlias $searchService,
+        private ElasticOpensearchSearchServiceAlias $searchService,
         private DoctrineSearchServiceAlias $doctrineSearchService
     ) {
     }
 
     public function searchBySearchQuery(SearchQuery $searchQuery): Result
     {
-        if ($searchQuery->searchSource === SearchSourceEnum::SEARCH && $this->searchService !== null) {
+        if ($searchQuery->searchSource === SearchSourceEnum::SEARCH) {
             return $this->searchService->searchBySearchQuery($searchQuery);
         }
 

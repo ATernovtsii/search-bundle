@@ -12,14 +12,17 @@ use ATSearchBundle\Search\Converter\FilterInputQueryToSearchQueryConverterInterf
 use ATSearchBundle\Search\Converter\InputQueryToSearchFilter;
 use ATSearchBundle\Search\Resolver\FieldNameResolver;
 use ATSearchBundle\Search\Resolver\FieldTypeResolver;
-use ATSearchBundle\Search\ValueObject\QueryDSL\{TermQuery, TermsQuery};
+use ATSearchBundle\Search\ValueObject\QueryDSL\TermQuery;
+use ATSearchBundle\Search\ValueObject\QueryDSL\TermsQuery;
 use InvalidArgumentException;
 use function is_array;
 
 readonly class FieldInConverterFilter implements FilterInputQueryToSearchQueryConverterInterface
 {
-    public function __construct(private FieldNameResolver $fieldNameResolver, private FieldTypeResolver $fieldTypeResolver)
-    {
+    public function __construct(
+        private FieldNameResolver $fieldNameResolver,
+        private FieldTypeResolver $fieldTypeResolver
+    ) {
     }
 
     public function convert(FilterQueryCriterion $criterion, InputQueryToSearchFilter $converter): array

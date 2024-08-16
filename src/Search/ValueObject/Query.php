@@ -9,6 +9,7 @@ class Query
     public int $size = 500;
     public array $sort = [];
     public array $filters = [];
+    public array $aggregations = [];
     public array $sourceIncludes = [];
     public bool $returnSource = true;
     public array $suggest = [];

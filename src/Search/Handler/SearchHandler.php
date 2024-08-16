@@ -38,8 +38,11 @@ readonly class SearchHandler
         if (isset($query->sort['_score'])) {
             $params['body']['track_scores'] = true;
         }
-        if (!empty($query->suggest)) {
+        if ($query->suggest) {
             $params['body']['suggest'] = $query->suggest;
+        }
+        if ($query->aggregations) {
+            $params['body']['aggs'] = $query->aggregations;
         }
 
         if ($query->returnSource && $query->sourceIncludes) {
@@ -47,10 +50,11 @@ readonly class SearchHandler
         }
 
         $totalCount = 0;
-        $data = [];
+        $data = $aggregations = [];
         try {
             $ESResponse = $this->searchClient->search($params);
             $totalCount = $ESResponse['hits']['total']['value'];
+            $aggregations = $ESResponse['aggregations'] ?? [];
             if ($query->returnSource) {
                 $data = array_map(static fn($hit) => $hit['_source'], $ESResponse['hits']['hits']);
             }
@@ -60,6 +64,7 @@ readonly class SearchHandler
         return new Result(
             $totalCount,
             $data,
+            $aggregations
         );
     }
 }
