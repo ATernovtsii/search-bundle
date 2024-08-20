@@ -2,7 +2,7 @@
 
 namespace ATSearchBundle\Query\Aggregation;
 
-readonly class RangeAggregation extends AbstractAggregation
+class RangeAggregation extends AbstractAggregation
 {
     public function __construct(
         string $name,

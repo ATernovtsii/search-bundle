@@ -2,7 +2,7 @@
 
 namespace ATSearchBundle\Query\Aggregation;
 
-readonly class MinAggregation extends AbstractAggregation
+class MinAggregation extends AbstractAggregation
 {
     public function __construct(string $name, public ?string $field = null, public ?string $script = null)
     {

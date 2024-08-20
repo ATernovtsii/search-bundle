@@ -2,7 +2,7 @@
 
 namespace ATSearchBundle\Query\Aggregation;
 
-readonly class SumAggregation extends AbstractAggregation
+class SumAggregation extends AbstractAggregation
 {
     public function __construct(string $name, public ?string $field = null, public ?string $script = null)
     {

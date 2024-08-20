@@ -4,7 +4,7 @@ namespace ATSearchBundle\Query\Aggregation;
 
 use ATSearchBundle\Enum\DateHistogramIntervalType;
 
-readonly class DateHistogramAggregation extends HistogramAggregation
+class DateHistogramAggregation extends HistogramAggregation
 {
     public function __construct(
         string $name,

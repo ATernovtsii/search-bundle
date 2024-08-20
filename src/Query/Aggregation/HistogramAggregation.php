@@ -2,7 +2,7 @@
 
 namespace ATSearchBundle\Query\Aggregation;
 
-readonly class HistogramAggregation extends AbstractAggregation
+class HistogramAggregation extends AbstractAggregation
 {
     public function __construct(
         string $name,

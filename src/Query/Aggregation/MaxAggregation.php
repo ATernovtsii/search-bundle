@@ -2,7 +2,7 @@
 
 namespace ATSearchBundle\Query\Aggregation;
 
-readonly class MaxAggregation extends AbstractAggregation
+class MaxAggregation extends AbstractAggregation
 {
     public function __construct(
         string $name, public ?string $field = null, public ?string $script = null
