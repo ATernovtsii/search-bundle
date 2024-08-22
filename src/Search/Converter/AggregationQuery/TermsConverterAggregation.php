@@ -24,18 +24,26 @@ readonly class TermsConverterAggregation implements AggregationInputQueryToSearc
 
         $payload = [
             'field' => $ESFieldName,
-            'size' => $aggregationQuery->size,
         ];
+
+        if ($aggregationQuery->size) {
+            $payload['size'] = $aggregationQuery->size;
+        }
+
+        if ($aggregationQuery->minDocCount) {
+            $payload['min_doc_count'] = $aggregationQuery->minDocCount;
+        }
 
         if ($aggregationQuery->order) {
             $payload['order'] = [$aggregationQuery->sortField => $aggregationQuery->order];
         }
 
+        $convertedData = ['terms' => $payload];
         if ($aggregationQuery->aggregations) {
-            $payload['aggs'] = $converter->convert($aggregationQuery->aggregations);
+            $convertedData['aggs'] = $converter->convert($aggregationQuery->aggregations);
         }
 
-        return ['terms' => $payload];
+        return $convertedData;
     }
 
     public function supports(AggregationQuery $aggregationQuery): bool

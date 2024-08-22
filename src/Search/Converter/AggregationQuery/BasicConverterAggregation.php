@@ -3,13 +3,13 @@
 namespace ATSearchBundle\Search\Converter\AggregationQuery;
 
 use ATSearchBundle\Enum\FieldType;
-use ATSearchBundle\Exception\CriterionFieldNotIndexedException;
 use ATSearchBundle\Query\Aggregation\AverageAggregation;
 use ATSearchBundle\Query\Aggregation\CardinalityAggregation;
 use ATSearchBundle\Query\Aggregation\MaxAggregation;
 use ATSearchBundle\Query\Aggregation\MinAggregation;
 use ATSearchBundle\Query\Aggregation\StatsAggregation;
 use ATSearchBundle\Query\Aggregation\SumAggregation;
+use ATSearchBundle\Query\Aggregation\ValueCountAggregation;
 use ATSearchBundle\Query\AggregationQuery;
 use ATSearchBundle\Search\Converter\AggregationInputQueryToSearchQueryConverterInterface;
 use ATSearchBundle\Search\Converter\InputQueryToSearchAggregation;
@@ -32,6 +32,7 @@ readonly class BasicConverterAggregation implements AggregationInputQueryToSearc
             && !$aggregationQuery instanceof SumAggregation
             && !$aggregationQuery instanceof CardinalityAggregation
             && !$aggregationQuery instanceof StatsAggregation
+            && !$aggregationQuery instanceof ValueCountAggregation
         ) {
             throw new InvalidArgumentException('Unsupported aggregation');
         }
@@ -42,6 +43,7 @@ readonly class BasicConverterAggregation implements AggregationInputQueryToSearc
             $aggregationQuery instanceof SumAggregation => 'sum',
             $aggregationQuery instanceof CardinalityAggregation => 'cardinality',
             $aggregationQuery instanceof StatsAggregation => 'stats',
+            $aggregationQuery instanceof ValueCountAggregation => 'value_count',
         };
 
         $payload = [];
@@ -49,7 +51,7 @@ readonly class BasicConverterAggregation implements AggregationInputQueryToSearc
             $ESFieldName = $this->fieldNameResolver->resolve($aggregationQuery->field) ?? $aggregationQuery->field;
 
             $fieldType = SchemaMapper::getCustomFieldTypeByESFieldName($ESFieldName);
-            if ($func !== 'cardinality'
+            if ($func !== 'cardinality' && $func !== 'value_count'
                 && !in_array($fieldType, [
                     FieldType::INTEGER->value,
                     FieldType::DATE->value,
@@ -86,6 +88,7 @@ readonly class BasicConverterAggregation implements AggregationInputQueryToSearc
             || $aggregationQuery instanceof AverageAggregation
             || $aggregationQuery instanceof SumAggregation
             || $aggregationQuery instanceof StatsAggregation
-            || $aggregationQuery instanceof CardinalityAggregation;
+            || $aggregationQuery instanceof CardinalityAggregation
+            || $aggregationQuery instanceof ValueCountAggregation;
     }
 }

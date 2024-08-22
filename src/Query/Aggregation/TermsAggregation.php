@@ -7,7 +7,8 @@ class TermsAggregation extends AbstractAggregation
     public function __construct(
         string $name,
         public string $field,
-        public int $size,
+        public ?int $size = null,
+        public ?int $minDocCount = null,
         public ?string $order = null,
         public string $sortField = '_count',
         public array $aggregations = []

@@ -44,7 +44,6 @@ class InputQueryToSearchAggregation
             $convertedAggregations[$aggregationQuery->getName()] = $converter->convert($aggregationQuery, $this);
         }
 
-
         return $convertedAggregations;
     }
 }

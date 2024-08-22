@@ -36,11 +36,13 @@ readonly class RangeConverterAggregation implements AggregationInputQueryToSearc
             'ranges' => $aggregationQuery->ranges,
         ];
 
+        $convertedData = ['range' => $payload];
         if ($aggregationQuery->aggregations) {
-            $payload['aggs'] = $converter->convert($aggregationQuery->aggregations);
+            $convertedData['aggs'] = $converter->convert($aggregationQuery->aggregations);
         }
 
-        return ['range' => $payload];
+
+        return $convertedData;
     }
 
     public function supports(AggregationQuery $aggregationQuery): bool

@@ -28,8 +28,9 @@ class ATSearchExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('at_search.search.enabled', $config['search']['enabled']);
-        if (!$config['search']['enabled']) {
+        $searchEnabled = $config['search']['enabled'] ?? false;
+        $container->setParameter('at_search.search.enabled', $searchEnabled);
+        if (!$searchEnabled) {
             $container->removeAlias('at_search.cache_compiler');
 
             return;
