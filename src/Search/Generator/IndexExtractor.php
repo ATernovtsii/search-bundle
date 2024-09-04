@@ -2,7 +2,7 @@
 
 namespace ATSearchBundle\Search\Generator;
 
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 class IndexExtractor
 {
@@ -11,7 +11,7 @@ class IndexExtractor
      */
     private iterable $extractors;
 
-    public function __construct(#[TaggedIterator('at_search.search.index.extractor')] iterable $extractors)
+    public function __construct(#[AutowireIterator('at_search.search.index.extractor')] iterable $extractors)
     {
         $this->extractors = $extractors;
     }

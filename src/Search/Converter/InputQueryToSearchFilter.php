@@ -2,7 +2,7 @@
 
 namespace ATSearchBundle\Search\Converter;
 
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use ATSearchBundle\Exception\NoConverterException;
 use ATSearchBundle\Query\FilterQueryCriterion;
 
@@ -11,7 +11,7 @@ class InputQueryToSearchFilter
     /** @var FilterInputQueryToSearchQueryConverterInterface[] */
     private iterable $converters;
 
-    public function __construct(#[TaggedIterator('at_search.search.query.filter_converter')] iterable $converters)
+    public function __construct(#[AutowireIterator('at_search.search.query.filter_converter')] iterable $converters)
     {
         $this->converters = $converters;
     }

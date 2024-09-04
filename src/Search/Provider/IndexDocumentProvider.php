@@ -3,7 +3,7 @@
 namespace ATSearchBundle\Search\Provider;
 
 use ATSearchBundle\Search\Generator\IndexDocumentInterface;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 final readonly class IndexDocumentProvider
 {
@@ -11,7 +11,7 @@ final readonly class IndexDocumentProvider
      * @param iterable<IndexDocumentInterface> $indexDocuments
      */
     public function __construct(
-        #[TaggedIterator('at_search.search.index_document')]
+        #[AutowireIterator('at_search.search.index_document')]
         private iterable $indexDocuments,
     ) {
     }

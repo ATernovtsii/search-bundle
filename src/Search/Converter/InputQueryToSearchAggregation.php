@@ -3,7 +3,7 @@
 namespace ATSearchBundle\Search\Converter;
 
 use ATSearchBundle\Query\AggregationQuery;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use ATSearchBundle\Exception\NoConverterException;
 
 class InputQueryToSearchAggregation
@@ -11,7 +11,7 @@ class InputQueryToSearchAggregation
     /** @var AggregationInputQueryToSearchQueryConverterInterface[] */
     private iterable $converters;
 
-    public function __construct(#[TaggedIterator('at_search.search.query.aggregation_converter')] iterable $converters)
+    public function __construct(#[AutowireIterator('at_search.search.query.aggregation_converter')] iterable $converters)
     {
         $this->converters = $converters;
     }

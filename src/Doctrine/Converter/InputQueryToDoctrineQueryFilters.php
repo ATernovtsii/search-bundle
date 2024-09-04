@@ -3,7 +3,7 @@
 namespace ATSearchBundle\Doctrine\Converter;
 
 use Doctrine\DBAL\Query\Expression\CompositeExpression;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use ATSearchBundle\Doctrine\JoinAwareQueryBuilder;
 use ATSearchBundle\Exception\NoConverterException;
 use ATSearchBundle\Query\FilterQueryCriterion;
@@ -14,7 +14,7 @@ class InputQueryToDoctrineQueryFilters
     private iterable $converters;
 
     public function __construct(
-        #[TaggedIterator('at_search.doctrine.query.filter')] iterable $converters,
+        #[AutowireIterator('at_search.doctrine.query.filter')] iterable $converters,
     ) {
         $this->converters = $converters;
     }
