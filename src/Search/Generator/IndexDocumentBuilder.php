@@ -9,6 +9,7 @@ use ATSearchBundle\Annotation\FieldId;
 use ATSearchBundle\Annotation\FieldIgnored;
 use ATSearchBundle\Annotation\FieldInt;
 use ATSearchBundle\Annotation\FieldMultiBool;
+use ATSearchBundle\Annotation\FieldMultiDateTime;
 use ATSearchBundle\Annotation\FieldMultiInt;
 use ATSearchBundle\Annotation\FieldMultiString;
 use ATSearchBundle\Annotation\FieldString;
@@ -138,6 +139,7 @@ class IndexDocumentBuilder
             FieldId::class => FieldType::ID,
             FieldString::class => FieldType::STRING,
             FieldDateTime::class => FieldType::DATE,
+            FieldMultiDateTime::class => FieldType::MULTI_DATE,
             FieldMultiString::class => FieldType::MULTI_STRING,
             FieldMultiInt::class => FieldType::MULTI_INTEGER,
             FieldInt::class => FieldType::INTEGER,
@@ -206,9 +208,17 @@ class IndexDocumentBuilder
             default => '',
         };
 
-        if (in_array($attribute->getName(), [FieldMultiString::class, FieldMultiInt::class], true)) {
+        if (
+            in_array(
+                $attribute->getName(),
+                [FieldMultiString::class, FieldMultiInt::class, FieldMultiBool::class, FieldMultiDateTime::class],
+                true
+            )
+        ) {
             $getter .= ' instanceof ReadableCollection ? ' . $getter . '->toArray() : ' . $getter;
-            $getter = 'array_map(static fn($item) =>' . $converter . '$item' . $subFieldFunc . ', ' . $getter . ')';
+            if ($converter || $subFieldFunc) {
+                $getter = 'array_map(static fn($item) => ' . $converter . '$item' . $subFieldFunc . ', ' . $getter . ')';
+            }
         } else {
             $getter = $converter . $getter . $subFieldFunc;
         }

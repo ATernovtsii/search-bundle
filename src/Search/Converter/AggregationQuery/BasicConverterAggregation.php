@@ -55,6 +55,7 @@ readonly class BasicConverterAggregation implements AggregationInputQueryToSearc
                 && !in_array($fieldType, [
                     FieldType::INTEGER->value,
                     FieldType::DATE->value,
+                    FieldType::MULTI_DATE->value,
                     FieldType::FLOAT->value,
                     FieldType::LONG->value,
                     FieldType::DOUBLE->value,

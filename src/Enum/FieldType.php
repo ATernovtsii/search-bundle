@@ -16,6 +16,7 @@ enum FieldType: string
     case BOOLEAN = 'bool';
     case MULTI_BOOLEAN = 'mbool';
     case DATE = 'date';
+    case MULTI_DATE = 'mdate';
     case FLOAT = 'float';
     case DOUBLE = 'double';
     case GEO_POINT = 'geo_point';

@@ -44,6 +44,13 @@ readonly class DocumentFieldMetadata
 
     public function isMulti(): bool
     {
-        return in_array($this->type, [FieldType::MULTI_STRING, FieldType::MULTI_INTEGER, FieldType::MULTI_BOOLEAN], true);
+        return in_array(
+            $this->type,
+            [
+                FieldType::MULTI_STRING, FieldType::MULTI_INTEGER, FieldType::MULTI_BOOLEAN,
+                FieldType::MULTI_DATE, FieldType::MULTI_LONG
+            ],
+            true
+        );
     }
 }
