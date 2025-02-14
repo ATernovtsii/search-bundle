@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 readonly class SearchServiceFacade implements SearchServiceInterface
 {
     public function __construct(
-        private ElasticOpensearchSearchServiceAlias $searchService,
+        private ?ElasticOpensearchSearchServiceAlias $searchService = null,
         private DoctrineSearchServiceAlias $doctrineSearchService
     ) {
     }
@@ -21,6 +21,10 @@ readonly class SearchServiceFacade implements SearchServiceInterface
     public function searchBySearchQuery(SearchQuery $searchQuery): Result
     {
         if ($searchQuery->searchSource === SearchSourceEnum::SEARCH) {
+            if (!$this->searchService) {
+                throw new \RuntimeException('Search service is not enabled. Please enable it in the configuration with elastic or opensearch.');
+            }
+
             return $this->searchService->searchBySearchQuery($searchQuery);
         }
 
