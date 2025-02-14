@@ -13,8 +13,8 @@ use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 readonly class SearchServiceFacade implements SearchServiceInterface
 {
     public function __construct(
+        private DoctrineSearchServiceAlias $doctrineSearchService,
         private ?ElasticOpensearchSearchServiceAlias $searchService = null,
-        private DoctrineSearchServiceAlias $doctrineSearchService
     ) {
     }
 
