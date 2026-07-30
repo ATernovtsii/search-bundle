@@ -6,6 +6,7 @@ use ATSearchBundle\Enum\SearchSourceEnum;
 use ATSearchBundle\Query\Filter\LogicalAnd;
 use ATSearchBundle\Query\SortClause\SortByField;
 use ATSearchBundle\Query\SortClause\SortByRelationField;
+use ATSearchBundle\Search\ValueObject\Document;
 use ATSearchBundle\ValueObject\Result;
 
 class SearchQuery
@@ -40,7 +41,7 @@ class SearchQuery
      */
     public array $subSelects = [];
 
-    public function __construct(public string $targetEntity, public int $tenantId = 0)
+    public function __construct(public string $targetEntity, public string|int $tenantId = Document::DEFAULT_TENANT_ID)
     {
     }
 

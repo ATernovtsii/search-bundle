@@ -228,7 +228,7 @@ class IndexDocumentBuilder
 
     private function getClassDetails(ReflectionClass $reflectionClass): array
     {
-        $tenantIdFunc = Document::DEFAULT_TENANT_ID;
+        $tenantIdFunc = '\'' . Document::DEFAULT_TENANT_ID . '\'';
         $idFunc = null;
         $fields = [];
         $fieldMap = [[]];
