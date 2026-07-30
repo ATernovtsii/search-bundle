@@ -17,7 +17,7 @@ readonly class DocumentGenerator
     ) {
     }
 
-    public function generateDocument(int $id, string $className): Document
+    public function generateDocument(int|string $id, string $className): Document
     {
         $entity = $this->em->getRepository($className)->find($id);
         $document = new Document($id, $this->getIndexName($className));

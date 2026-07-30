@@ -13,7 +13,7 @@ final readonly class CompiledClassCacheWarmer implements CacheWarmerInterface
     ) {
     }
 
-    public function warmUp(string $cacheDir, string $buildDir = null): array
+    public function warmUp(string $cacheDir, ?string $buildDir = null): array
     {
         if (!$this->documentMetadataGenerator->cacheBaseDir) {
             $this->documentMetadataGenerator->cacheBaseDir = $cacheDir;
