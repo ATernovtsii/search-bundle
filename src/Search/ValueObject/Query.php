@@ -13,6 +13,6 @@ class Query
     public array $sourceIncludes = [];
     public bool $returnSource = true;
     public array $suggest = [];
-    public int $tenantId;
+    public int|string|null $tenantId;
     public bool $withCount = true;
 }
