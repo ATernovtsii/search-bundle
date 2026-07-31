@@ -29,7 +29,7 @@ readonly class IndexManager
         $this->client->indices()->delete(['index' => $index]);
     }
 
-    public function index(int $id, string $className): void
+    public function index(int|string $id, string $className): void
     {
         $document = $this->documentGenerator->generateDocument($id, $className);
         $this->processSingleDocument($document);
