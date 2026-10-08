@@ -11,7 +11,7 @@ readonly class CustomFieldFilter implements FilterQueryCriterion
     public function __construct(
         public string $field,
         public string $operator,
-        public mixed $value,
+        public mixed $value = null,
     ) {
     }
 }

@@ -4,12 +4,13 @@ namespace ATSearchBundle\Query;
 
 abstract class Operator
 {
-    public const EQ = '=';
-    public const GT = '>';
-    public const GTE = '>=';
-    public const LT = '<';
-    public const LTE = '<=';
-    public const IN = 'in';
-    public const BETWEEN = 'between';
-    public const LIKE = 'like';
+    public const string EQ = '=';
+    public const string GT = '>';
+    public const string GTE = '>=';
+    public const string LT = '<';
+    public const string LTE = '<=';
+    public const string IN = 'in';
+    public const string BETWEEN = 'between';
+    public const string LIKE = 'like';
+    public const string EXISTS = 'exists';
 }
